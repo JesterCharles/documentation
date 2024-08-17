@@ -67,24 +67,37 @@ Goal: Generate a CI/CD Pipeline with Jenkins to build & deploy both our Backend 
         ```bash
         cat /var/lib/jenkins/secrets/initialAdminPassword
         ```
-        ![](./resources/admin-password.png)
+        <img src="./resources/admin-password.png" height="250" width="600"/>
+   
     - Now, click `Install Suggested Plugins`
     - Next, create a login for your application so you don't need to reobtain this password. Please make sure you utilize a username and password you won't forget.'
     - `Instance Configuration` leave as default and click `Save and Finish`
     - Click `Start using Jenkins` to navigate to the Jenkins Dashboard
     - You should then be presented with the dashboard
 6. Click `Manage Jenkins` - We need to quickly setup our nodes so the built-in executor can still operate. Otherwise we will have to manually run the node, defeating the purpose of Jenkins.
-        ![](./resources/manage-jenkins.png)
-        - **OPTIONALLY**: If you want Dark Mode, while we are here you can also, click `Appearance` and set theme to `Dark` and click `Save`
-        ![](./resources/nodes-appear.png)
+
+    <img src="./resources/manage-jenkins.png" height="250" width="600"/>
+    
+    - **OPTIONALLY**: If you want Dark Mode, while we are here you can also, click `Appearance` and set theme to `Dark` and click `Save`
+        
+    <img src="./resources/nodes-appear.png" height="250" width="600"/>
+
 7. While here, we need to click `Configure Monitors`.
-    ![](./resources/configure-monitors.png)
+
+    <img src="./resources/configure-monitors.png" height="250" width="600"/>
+
 8. Check all boxes with `Don't mark agents temporarily offline`. Click `Save`
-    ![](./resources/dont-mark-off.png)
+
+    <img src="./resources/dont-mark-off.png" height="250" width="600"/>
+
 9. Back at the Nodes pages, look the to the left hand navigation window & click `Built-In Node`
-    ![](./resources/built-node-restart.png)
+
+    <img src="./resources/built-node-restart.png" height="250" width="600"/>
+
 10. From here we just need to click `Bring this node back online` which should help keep our built-in node running to handle any stages from our pipelines later.
-    ![](./resources/nodes-back-online.png)
+
+    <img src="./resources/nodes-back-online.png" height="250" width="600"/>
+
 6. We reboot our server, afterwards you'll have to reconnet via step #2 `ssh` command. In the meanwhile, you can prepare your backend and frontend with the files specified below if you haven't already.:
     ```bash
     reboot
@@ -300,23 +313,39 @@ pipeline{
 ## Configure Jenkins Build Pipeline
 
 1. On Jenkins Dashboard, click `New Item+`. Enter in the name of your pipline (you'll need one for frontend and backend deployment). ***Make sure you select Pipeline as the item type***
-![](./resources/admin-password.png)
+
+    <img src="./resources/admin-password.png" height="250" width="600"/>
+
 2. Check Github Project & paste in url
 3. Under triggers, check GitHub hook trigger for GITScm polling
-![](./resources/git-proj-poll.png)
+
+    <img src="./resources/git-proj-poll.png" height="250" width="600"/>
+
 4. Got to GitHub Repo > Settings > Webhooks > Add Webhook  Add the jenkins URL (see Step 12 above), adding /github-webhook/ to the url.
-![](./resources/settings-webhook.png)
-![](./resources/github-webhoook.png)
+
+    <img src="./resources/settings-webhook.png" height="250" width="600"/>
+
+    <img src="./resources/github-webhoook.png" height="250" width="600"/>
+
 5. Pipeline > Pipeline Script from SCM
 6. SCM > Git, and paste in github url
-![](./resources/pipeline-from-scm.png)
+
+    <img src="./resources/pipeline-from-scm.png" height="250" width="600"/>
+
 7. Underneath credentials click add for the dockerHub(username & pass) & DBPASS credentials (secret text) for backend pipeline
-![](./resources/docker-hub-creds.png)
-![](./resources/docker-creds.png)
-**NOTE: Backend Only**
-![](./resources/dbpass.png)
+
+    <img src="./resources/docker-hub-creds.png" height="250" width="600"/>
+
+    <img src="./resources/docker-creds.png" height="250" width="600"/>
+
+    **NOTE: DBPASS is for Backend Only**
+
+    <img src="./resources/dbpass.png" height="250" width="600"/>
+
 8. Branch Specifier to main
-![](./resources/rename-master-main.png)
+
+    <img src="./resources/rename-master-main.png" height="250" width="600"/>
+
 9. Now you can push your code & watch as the pipelines automatically build your application. After pipelines have successfully completed, you may need to wait 2-3 minutes before the endspoints you call will actually work. Given this example I would attempt these two endpoints to check for each deployment. **DOUBLE CHECK!!! That you've updated your backend & frontend URLs to the newly hosted sites to make sure these applications may interact with one another.**:
     1. `http://ec2-18-119-108-103.us-east-2.compute.amazonaws.com:8888/flights`
-    2. 
+    2. `http://ec2-18-119-108-103.us-east-2.compute.amazonaws.com:5005`
