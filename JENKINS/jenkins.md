@@ -15,7 +15,6 @@ Goal: Generate a CI/CD Pipeline with Jenkins to build & deploy both our Backend 
 1. Virtual Machine on Cloud Provider (AWS EC2, Azure Virtual Machines, GCP Compute Engine)
     - 1 vCPU min
     - 2 GB RAM min
-    - 10+GB Storage
 2. Git
 3. Docker
 
@@ -314,7 +313,7 @@ pipeline{
 
 1. On Jenkins Dashboard, click `New Item+`. Enter in the name of your pipline (you'll need one for frontend and backend deployment). ***Make sure you select Pipeline as the item type***
 
-    <img src="./resources/admin-password.png" height="250" width="600"/>
+    <img src="./resources/new-item-pipeline.png" height="250" width="600"/>
 
 2. Check Github Project & paste in url
 3. Under triggers, check GitHub hook trigger for GITScm polling
